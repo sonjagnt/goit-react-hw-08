@@ -1,0 +1,12 @@
+.searchbox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 200px;
+  margin-bottom: 24px;
+}
+
+.searchbox input {
+  height: 20px;
+  outline: none;
+}
