@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.header::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  background-color: #000;
+  height: 1px;
+  top: 40px;
+}
