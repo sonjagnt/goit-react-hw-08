@@ -1,9 +1,20 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import { Box, Button, TextField } from "@mui/material";
+import * as Yup from "yup";
 
 function LoginForm() {
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .min(3, "Too short")
+      .max(50, "Too long")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(7, "Password has to be at least 7 characters long")
+      .max(50, "Too long")
+      .required("Password is required"),
+  });
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     dispatch(
@@ -25,6 +36,7 @@ function LoginForm() {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
+        validationSchema={validationSchema}
       >
         <Form>
           <Field
@@ -35,6 +47,8 @@ function LoginForm() {
             variant="standard"
             autoComplete="on"
           />
+          <ErrorMessage name="email" component="span" />
+
           <Field
             as={TextField}
             label="Password"
@@ -43,6 +57,7 @@ function LoginForm() {
             variant="standard"
             autoComplete="on"
           />
+          <ErrorMessage name="password" component="span" />
           <Button type="submit" variant="contained">
             Log In
           </Button>
