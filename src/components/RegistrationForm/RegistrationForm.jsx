@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import { Box, TextField } from "@mui/material";
 import s from "./RegistrationForm.module.css";
@@ -27,6 +27,7 @@ function RegistrationForm() {
         password: values.password,
       })
     );
+
     actions.resetForm();
   };
   return (
