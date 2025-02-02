@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import s from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import { Button } from "@mui/material";
 
 const ContactForm = () => {
   const validationSchema = Yup.object().shape({
@@ -47,9 +48,13 @@ const ContactForm = () => {
           <Field type="tel" name="number" className={s.input} />
           <ErrorMessage name="number" component="span" />
         </label>
-        <button type="submit" className={s.btn}>
+        <Button
+          type="submit"
+          variant="contained"
+          style={{ fontSize: "12px", width: "fit-content" }}
+        >
           Add contact
-        </button>
+        </Button>
       </Form>
     </Formik>
   );

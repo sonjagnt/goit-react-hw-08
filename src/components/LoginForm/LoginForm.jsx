@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import { Box, Button, TextField } from "@mui/material";
 import * as Yup from "yup";
+import s from "./LoginForm.module.css";
 
 function LoginForm() {
   const validationSchema = Yup.object().shape({
@@ -33,12 +34,13 @@ function LoginForm() {
       noValidate
       autoComplete="off"
     >
+      <h3 className={s.title}>Log in</h3>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form className={s.form}>
           <Field
             as={TextField}
             label="Email"

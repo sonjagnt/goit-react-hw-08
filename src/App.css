@@ -24,3 +24,8 @@ p {
 .title {
   margin-bottom: 18px;
 }
+
+a {
+  text-decoration: none;
+  color: #1a2dc0;
+}
