@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteContact, updContact } from "../../redux/contacts/operations";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { useState } from "react";
+import { UpdateContactForm } from "../UpdateContactForm/UpdateContactForm";
 
 function Contact({ contact }) {
   const style = {
@@ -17,24 +18,23 @@ function Contact({ contact }) {
     textAlign: "center",
   };
 
-  const [showModal, setShowModal] = useState(false);
+  const [showUpdModal, setShowUpdModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteContact(contact.id));
     setShowModal(false);
   };
-  // const handleEdit = () => {
-  //   dispatch(updContact(contact.id));
-  // };
+
   return (
     <div>
       <h3>{contact.name}</h3>
       <p>{contact.number}</p>
-      <Button onClick={() => setShowModal(true)} variant="contained">
+      <Button onClick={() => setShowDeleteModal(true)} variant="contained">
         Delete
       </Button>
-      {showModal && (
-        <Modal open={showModal} onClose={() => setShowModal(false)}>
+      {showDeleteModal && (
+        <Modal open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
           <Box sx={style}>
             <Typography
               id="modal-modal-title"
@@ -61,7 +61,14 @@ function Contact({ contact }) {
           </Box>
         </Modal>
       )}
-      {/* <button onClick={handleEdit}>Edit</button> */}
+      <Button onClick={() => setShowUpdModal(true)}>Edit</Button>
+
+      <Modal open={showUpdModal} onClose={() => setShowUpdModal(false)}>
+        <UpdateContactForm
+          contact={contact}
+          onClose={() => setShowUpdModal(false)}
+        />
+      </Modal>
     </div>
   );
 }

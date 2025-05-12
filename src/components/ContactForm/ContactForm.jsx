@@ -1,22 +1,11 @@
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import s from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { Button } from "@mui/material";
+import { validationSchema } from "../../validation/contacts.js";
 
 const ContactForm = () => {
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(3, "Too short")
-      .max(50, "Too long")
-      .required("Name is required"),
-    number: Yup.string()
-      .min(3, "Too short")
-      .max(50, "Too long")
-      .required("Number is required"),
-  });
-
   const dispatch = useDispatch();
   const handleSubmit = (values, { resetForm }) => {
     dispatch(

@@ -52,7 +52,11 @@ const slice = createSlice({
       .addCase(updContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = action.payload;
+        const newContact = action.payload;
+        const index = state.items.findIndex((i) => i.id === newContact.id);
+        if (index !== -1) {
+          state.items[index] = newContact;
+        }
       })
       .addCase(updContact.rejected, handleRejected)
       .addCase(logOut.fulfilled, (state) => {
